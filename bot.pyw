@@ -111,7 +111,7 @@ def main():
                 threads = int(args[4])
 
                 for _ in range(threads):
-                    threading.Thread(target=attack_vse, args=(ip, port, secs), daemon=True).start()
+                    threading.Thread(target=attack_hex, args=(ip, port, secs), daemon=True).start()
 
             elif command == '.UDP':
                 ip = args[1]
